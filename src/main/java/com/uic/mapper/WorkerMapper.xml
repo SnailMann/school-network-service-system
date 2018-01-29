@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.mapper.WorkerMapper">
+    <resultMap id="workerResultMap" type="com.uic.po.Worker">
+        <id column="id" property="id"/>
+        <result column="worker_id" property="workerId"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="flag" property="flag"/>
+    </resultMap>
+
+    <select id="queryWorker" parameterType="com.uic.po.Worker" resultMap="workerResultMap">
+        SELECT * FROM worker WHERE flag=1
+    </select>
+    <select id="findWorkerByWorkerId" resultMap="workerResultMap">
+        SELECT * FROM worker WHERE worker_id=#{workerId}
+    </select>
+    <update id="updateWorkerByWorkerId" parameterType="com.uic.po.Worker">
+        UPDATE worker SET name=#{name},phone=#{phone} WHERE worker_id=#{workerId}
+    </update>
+    <insert id="insertOrUpdateWorker" parameterType="com.uic.po.Worker">
+        INSERT INTO worker (worker_id)
+         VALUES (#{workerId})
+         ON DUPLICATE KEY UPDATE name=NULL , phone=NULL ,flag=1;
+    </insert>
+    <update id="deleteWorkerByWorkerId">
+        UPDATE worker SET flag=0 WHERE worker_id=#{workerId}
+    </update>
+</mapper>

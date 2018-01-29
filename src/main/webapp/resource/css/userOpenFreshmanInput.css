@@ -1,0 +1,39 @@
+.containers {
+    width: 100%;
+}
+
+.inf {
+    width: 500px;
+    margin: auto;
+}
+
+.box {
+    width: 500px;
+    margin-left: 100px
+}
+
+.inf h1 {
+    margin-left: 150px
+}
+
+.btn1 {
+    margin-top: 10px
+}
+.search {
+    width: 100%;
+    height: 82px;
+    border-bottom: 1px solid #CCCCCC;
+    background: url("../img/home.jpg") no-repeat left 15px;
+    background-size: 60px 80px;
+    overflow: hidden;
+}
+
+.sear {
+    width: 200px;
+    font-family: 微软雅黑;
+    margin-top: 25px;
+    margin-left: 50px;
+    font-size: 25px;
+    float: left;
+}
+

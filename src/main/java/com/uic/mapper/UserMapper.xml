@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.mapper.UserMapper">
+    <resultMap id="userResultMap" type="com.uic.po.User">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_password" property="userPassword"/>
+        <result column="user_role_id" property="userRoleId"/>
+        <result column="flag" property="flag"/>
+    </resultMap>
+    <resultMap id="roleResultMap" type="com.uic.po.Role">
+        <id column="id" property="id"/>
+        <result column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+    </resultMap>
+    <sql id="query_user_where">
+        flag=1
+        <if test="user!=null">
+            <if test="user.userId!=null and user.userId!=''">
+                AND user_id=#{user.userId}
+            </if>
+            <if test="user.userRoleId!=null and user.userRoleId!=''">
+                AND user_role_id=#{user.userRoleId}
+            </if>
+        </if>
+    </sql>
+
+    <select id="queryUser" resultMap="userResultMap">
+        SELECT * FROM login_user
+        <where>
+            <include refid="query_user_where"/>
+        </where>
+    </select>
+    <select id="findUserByUserId" resultMap="userResultMap">
+        SELECT * FROM login_user WHERE user_id=#{Id} AND flag=1
+    </select>
+    <select id="findRoleByRoleId" resultMap="roleResultMap">
+        SELECT * FROM login_role WHERE role_id=#{roleId}
+    </select>
+    <insert id="insertUser" parameterType="com.uic.po.User">
+        INSERT INTO login_user(user_id,user_password,user_role_id) VALUES (#{userId},#{userPassword},#{userRoleId})
+    </insert>
+    <insert id="insertOrUpdateUser" parameterType="com.uic.po.User">
+        INSERT INTO login_user(user_id,user_password,user_role_id)
+         VALUES (#{userId},#{userPassword},#{userRoleId})
+         ON DUPLICATE KEY UPDATE user_password=VALUES(user_password), user_role_id=VALUES(user_role_id),flag=1;
+    </insert>
+    <update id="updateUserPasswordByUserId">
+        UPDATE login_user SET user_password=#{password} WHERE user_id=#{userId}
+    </update>
+
+    <update id="deleteUserByUserId">
+        UPDATE login_user SET flag=0 WHERE user_id=#{userId}
+    </update>
+
+    <delete id="deleteUserTrue" parameterType="java.lang.String">
+        DELETE FROM login_user
+        WHERE user_id LIKE #{id}
+    </delete>
+</mapper>

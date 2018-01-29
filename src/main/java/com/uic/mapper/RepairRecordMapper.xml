@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.mapper.RepairRecordMapper">
+    <!--定义学生报修信息-->
+    <resultMap id="RepairRecordMapper" type="com.uic.po.RepairRecord">
+        <id column="Id" property="id"></id>
+        <result column="student_id" property="studentId"></result>
+        <result column="add_time" property="addTime"></result>
+        <result column="contact_time" property="contactTime"></result>
+        <result column="repair_content" property="repairContent"></result>
+        <result column="flag" property="flag"></result>
+        <result column="result_flag" property="resultFlag"></result>
+        <result column="advice" property="advice"></result>
+    </resultMap>
+
+    <resultMap id="RepairRecordCustomMapper" type="com.uic.po.RepairRecordCustom">
+        <id column="Id" property="id"></id>
+        <result column="student_id" property="studentId"></result>
+        <result column="add_time" property="addTime"></result>
+        <result column="contact_time" property="contactTime"></result>
+        <result column="repair_content" property="repairContent"></result>
+        <result column="flag" property="flag"></result>
+        <result column="result_flag" property="resultFlag"></result>
+        <result column="advice" property="advice"></result>
+        <result column="name" property="name"></result>
+        <result column="phone" property="phone"></result>
+        <result column="dorm" property="dorm"></result>
+    </resultMap>
+
+    <insert id="insertRepairRecord" parameterType="com.uic.po.RepairRecord">
+        INSERT INTO repair_record_student(student_id,add_time,contact_time,repair_content)
+        VALUES (#{studentId},#{addTime},#{contactTime},#{repairContent})
+    </insert>
+
+    <!--根据studentId查找所有学生报修信息（处理，未处理）-->
+    <select id="findRepairRecordByStudentId" resultMap="RepairRecordCustomMapper">
+        SELECT repair_record_student.student_id,repair_record_student.add_time,repair_record_student.contact_time,repair_record_student.repair_content,repair_record_student.result_flag,student.name,student.phone,student.dorm
+        FROM repair_record_student,student
+        WHERE student.student_id=#{studentId}
+        AND repair_record_student.student_id=student.student_id
+        AND repair_record_student.flag=1
+        ORDER BY add_time DESC
+    </select>
+
+    <!--遍历所有学生报修信息（处理，未处理）-->
+    <select id="queryRepairRecord" resultMap="RepairRecordCustomMapper">
+        SELECT repair_record_student.student_id,repair_record_student.add_time,repair_record_student.contact_time,repair_record_student.repair_content,repair_record_student.result_flag,student.name,student.phone,student.dorm
+        FROM repair_record_student,student
+        WHERE repair_record_student.student_id=student.student_id
+        AND repair_record_student.flag=1
+        ORDER BY add_time DESC
+    </select>
+
+    <!--根据studentId查找所有学生报修信息（未处理）-->
+    <select id="findNoDealRepairRecoreByStudentId" resultMap="RepairRecordCustomMapper">
+        SELECT repair_record_student.student_id,repair_record_student.add_time,repair_record_student.contact_time,repair_record_student.repair_content,repair_record_student.result_flag,student.name,student.phone,student.dorm
+        FROM repair_record_student,student
+        WHERE student.student_id=#{studentId}
+        AND repair_record_student.student_id=student.student_id
+        AND repair_record_student.result_flag=0
+        AND repair_record_student.flag=1
+        ORDER BY add_time
+    </select>
+
+    <!--遍历所有学生报修信息（未处理）-->
+    <select id="queryNoDealRepairRecord" resultMap="RepairRecordCustomMapper">
+        SELECT repair_record_student.student_id,repair_record_student.add_time,repair_record_student.contact_time,repair_record_student.repair_content,repair_record_student.result_flag,student.name,student.phone,student.dorm
+        FROM repair_record_student,student
+        WHERE repair_record_student.student_id=student.student_id
+        AND repair_record_student.result_flag=0
+        AND repair_record_student.flag=1
+        ORDER BY add_time
+    </select>
+
+    <!--根据studentId查找所有学生报修信息（已处理）-->
+    <select id="findDealRepairRecoreByStudentId" resultMap="RepairRecordCustomMapper">
+        SELECT repair_record_student.student_id,repair_record_student.add_time,repair_record_student.contact_time,repair_record_student.repair_content,repair_record_student.result_flag,student.name,student.phone,student.dorm
+        FROM repair_record_student,student
+        WHERE student.student_id=#{studentId}
+        AND repair_record_student.student_id=student.student_id
+        AND repair_record_student.result_flag=1
+        AND repair_record_student.flag=1
+        ORDER BY add_time DESC
+    </select>
+
+    <!--遍历所有学生报修信息（已处理）-->
+    <select id="queryDealRepairRecord" resultMap="RepairRecordCustomMapper">
+        SELECT repair_record_student.student_id,repair_record_student.add_time,repair_record_student.contact_time,repair_record_student.repair_content,repair_record_student.result_flag,student.name,student.phone,student.dorm
+        FROM repair_record_student,student
+        WHERE repair_record_student.student_id=student.student_id
+        AND repair_record_student.result_flag=1
+        AND repair_record_student.flag=1
+        ORDER BY add_time DESC
+    </select>
+
+    <update id="deleteRepairRecordByStudentId" parameterType="java.lang.String">
+        UPDATE repair_record_student
+        SET repair_record_student.flag=0
+        WHERE repair_record_student.student_id=#{studentId}
+    </update>
+
+    <select id="updateRepairRecordByStudentRepairContent">
+        UPDATE  repair_record_student
+        SET repair_record_student.advice=#{advice}, repair_record_student.result_flag=1
+        WHERE repair_record_student.repair_content=#{repairContent}
+    </select>
+
+    <select id="findRepairRecordByStudentIdByExample" parameterType="com.uic.po.RepairRecord"
+            resultMap="RepairRecordCustomMapper">
+        SELECT repair_record_student.student_id,repair_record_student.add_time,repair_record_student.contact_time,repair_record_student.repair_content,student.name,student.phone,student.dorm
+        FROM repair_record_student,student
+        WHERE repair_record_student.student_id=#{studentId}
+        AND repair_record_student.flag=#{resultFlag}
+        ORDER BY add_time
+    </select>
+
+    <!--根据sudentId与repairContent来查找唯一报修记录-->
+    <select id="findRepairRecordByStudentIdAndrepairContent" resultMap="RepairRecordCustomMapper">
+        SELECT repair_record_student.student_id,repair_record_student.add_time,repair_record_student.contact_time,repair_record_student.repair_content,repair_record_student.result_flag,repair_record_student.advice,student.name,student.phone,student.dorm
+        FROM repair_record_student,student
+        WHERE repair_record_student.student_id=#{studentId}
+        AND student.student_id=repair_record_student.student_id
+        AND repair_record_student.repair_content=#{repairContent}
+        ORDER BY add_time
+    </select>
+
+    <select id="findRepairRecordByStudentIdAndresultFlag" resultMap="RepairRecordCustomMapper">
+        SELECT repair_record_student.student_id,repair_record_student.add_time,repair_record_student.contact_time,repair_record_student.repair_content,repair_record_student.advice,student.name,student.phone,student.dorm
+        FROM repair_record_student,student
+        WHERE repair_record_student.flag=1
+        AND student.student_id=#{studentId}
+        AND repair_record_student.student_id=student.student_id
+        AND repair_record_student.result_flag=#{resultFlag}
+    </select>
+
+    <delete id="deleteRepairRecordTrue" parameterType="java.lang.String">
+        DELETE FROM repair_record_student
+        WHERE student_id LIKE #{id}
+    </delete>
+
+    <delete id="deleteRepairRecordByStudentIdAndrepairContent" >
+        DELETE FROM repair_record_student
+        WHERE repair_record_student.student_id=#{studentId}
+        AND repair_record_student.repair_content=#{repairContent}
+    </delete>
+</mapper>

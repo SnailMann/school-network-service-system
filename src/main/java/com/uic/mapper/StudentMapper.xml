@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.mapper.StudentMapper">
+    <!--ResultMap-->
+    <resultMap id="studentResultMap" type="com.uic.po.Student">
+        <id column="id" property="id"/>
+        <result column="student_id" property="studentId"/>
+        <result column="name" property="name"/>
+        <result column="student_idcard" property="idCard"/>
+        <result column="dorm" property="dorm"/>
+        <result column="phone" property="phone"/>
+        <result column="flag" property="flag"/>
+    </resultMap>
+    <!--sql片段-->
+
+    <!--sql语句-->
+    <select id="queryStudent" resultMap="studentResultMap">
+        SELECT student_id,name,student_idcard,dorm,phone
+        FROM student
+        WHERE flag=1
+    </select>
+    <select id="findStudentById" parameterType="java.lang.String" resultMap="studentResultMap">
+        SELECT student_id,name,student_idcard,dorm,phone
+        FROM student
+        WHERE student_id=#{studentId}
+        AND flag=1
+    </select>
+    <select id="findStudentCountById" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM student
+        WHERE student_id=#{studentId}
+        AND flag=1
+    </select>
+    <insert id="insertStudent" parameterType="com.uic.po.Student" >
+        INSERT INTO student(student.student_id,student.name,student.student_idcard,student.dorm,student.phone)
+        VALUES (#{studentId},#{name},#{idCard},#{dorm},#{phone})
+
+    </insert>
+    <insert id="insertOrUpdateStudent" parameterType="com.uic.po.Student">
+        INSERT INTO student (student_id,name,student_idcard,dorm,phone)
+        VALUES (#{studentId},#{name},#{idCard},#{dorm},#{phone})
+        ON DUPLICATE KEY UPDATE name=VALUES(name),student_idcard=VALUES(student_idcard),dorm=VALUES(dorm),phone=VALUES(phone),flag=1;
+
+    </insert>
+    <select id="findrepairStudent" parameterType="java.lang.String" resultMap="studentResultMap">
+        SELECT student.student_id,student.name,student.phone,student.dorm
+        FROM student
+        WHERE student.student_id=#{studentId}
+    </select>
+
+    <delete id="deleteStudentTrue" parameterType="java.lang.String">
+        DELETE FROM student
+        WHERE student_id LIKE #{id}
+    </delete>
+</mapper>

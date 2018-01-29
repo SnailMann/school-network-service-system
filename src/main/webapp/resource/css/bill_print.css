@@ -1,0 +1,24 @@
+html{text-align: center;}
+div{border-top:solid 1px black;border-left:solid 1px black;}
+
+.container{ border:none;}
+
+.header{ border:none;}
+.name{float: left;width: 33%;}
+.type{float: left;width: 34%;border-right:solid 1px black;}
+.job_num{border-right:solid 1px black;}
+
+.content{ border:none;height: 100px;}
+.info{float: left;width: 50%;border-right:solid 1px black;height: 100px;}
+.info_top{boder: none;border-right:solid 1px black;}
+.charge{border-right:solid 1px black;height: 100px;}
+.charge_top{boder: none;border-right:solid 1px black;}
+
+.footer{ border:none;}
+.total{text-align: right;padding-right: 10%;border-right:solid 1px black;}
+.total .label1{padding-right: 20%;}
+.zh{text-align: right;padding-right: 10%;border-right:solid 1px black;}
+.date{text-align: right;padding-right: 10%;border-right:solid 1px black;border-bottom:solid 1px black;}
+.date .label1{padding-right: 30%;}
+
+.button{border: none;text-align: end;margin-top: 20px;padding-right: 50px;}

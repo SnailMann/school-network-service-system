@@ -1,0 +1,55 @@
+.search {
+    width: 100%;
+    height: 82px;
+    border-bottom: 1px solid #CCCCCC;
+    background: url("../img/home.jpg") no-repeat left 15px;
+    background-size: 60px 80px;
+    overflow: hidden;
+}
+.sear {
+    font-family: 微软雅黑;
+    margin-top: 25px;
+    margin-left: 50px;
+    font-size: 25px;
+}
+.fun {
+    width: 200px;
+    height: 30px;
+    float: right;
+    margin-top: -40px;
+}
+
+ul li{list-style-type: none;}
+.table td{width: 50%;}
+
+.container{padding-top: 20px;}
+
+.header{border: 2px grey solid; border-radius: 10px;}
+.top{width: 100%;text-align: center;font-size: 30px;border-bottom: 2px grey solid;}
+.input-group{width: 30%;float: left;margin: 10px 5% 5px 5%;}
+.g2{width: 26%;}
+.mt{margin: 10px 5% 10px 5%;text-align: center;}
+
+.content{margin-top: 20px;padding-top: 20px;border: 2px grey solid; border-radius: 10px;}
+.s_info{margin-bottom: 15px;}
+.name{float: left;width: 48%;}
+.name_lab{float: left;line-height: 34px;}
+#name_text{width: 40%;}
+.sid{float: left;width: 34%;}
+.sid_lab{float: left;line-height: 34px;}
+#sid_text{width: 50%;}
+.type{padding-top: 15px;margin-bottom: 15px;width: 48%;}
+.type_lab{float: left;line-height: 34px;}
+#type{width: 40%;}
+
+.tb{padding-left: 37px;}
+.lab{float: left;line-height: 34px;}
+#info_name{width: 30%;}
+#info_value{width: 30%;}
+#charge_name{width: 30%;}
+#charge_value{width: 30%;}
+
+.footer{margin-top: 20px;}
+.sub{width: 50%;float: left;text-align: center;}
+.res{text-align: center;}
+

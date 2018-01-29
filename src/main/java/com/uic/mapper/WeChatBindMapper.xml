@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.mapper.WeChatBindMapper">
+    <resultMap id="studentOpenIdResultMap" type="com.uic.po.StudentOpenId">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="open_id" property="openId"/>
+        <result column="flag" property="flag"/>
+    </resultMap>
+    <resultMap id="userResultMap" type="com.uic.po.User">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_password" property="userPassword"/>
+        <result column="user_role_id" property="userRoleId"/>
+        <result column="flag" property="flag"/>
+    </resultMap>
+    <select id="checkStudentIdBindExist" parameterType="java.lang.String" resultMap="studentOpenIdResultMap">
+        SELECT * FROM student_openid WHERE user_id=#{studentId} AND flag=1
+    </select>
+    <select id="checkBindExist" parameterType="java.lang.String" resultMap="studentOpenIdResultMap">
+        SELECT * FROM student_openid WHERE open_id=#{openId} AND flag=1
+    </select>
+    <select id="findStudentUser" parameterType="java.lang.String" resultMap="userResultMap">
+        SELECT * FROM login_user WHERE user_id=#{studentId} AND user_role_id=1 AND flag=1
+    </select>
+    <insert id="BindOpenId">
+        INSERT INTO student_openid(user_id,open_id) VALUES (#{studentId},#{openId})
+    </insert>
+</mapper>

@@ -1,0 +1,29 @@
+.containers{width: 1600px;}
+.head{width: 1670px;border-bottom: 1px solid black;padding: 20px}
+.btn1{margin-left: 100px}
+.btn2{margin-left: 50px}
+.select{width:150px;margin-left: 100px;margin-top: 50px;}
+.input1{width: 200px;margin-left: 300px;margin-top: -34px}
+.btn3{margin-left: 550px;margin-top: -53px}
+.search {
+    width: 1700px;
+    height: 82px;
+    border-bottom: 1px solid #CCCCCC;
+    background: url("../img/home.jpg") no-repeat left 15px;
+    background-size: 60px 80px;
+    overflow: hidden;
+}
+
+.sear {
+    font-family: 微软雅黑;
+    margin-top: 25px;
+    margin-left: 50px;
+    font-size: 25px;
+}
+
+.fun {
+    width: 200px;
+    height: 30px;
+    float: right;
+    margin-top: -40px;
+}

@@ -1,0 +1,103 @@
+.print {
+    width: 960px;
+    height: 310px;
+    margin: auto;
+    font-family: 微软雅黑;
+    font-size: 16px;
+}
+.clear{ clear: both}
+
+.btn1 {
+    float: right;
+    margin-top: 20px;
+    margin-right: 150px;
+}
+
+.div1 {
+    height: 50px;
+    width: 960px;
+}
+
+.username {
+    width: 200px;
+    height: 50px;
+    margin-left: 490px;
+    float: left;
+    padding-top: 30px;
+}
+
+.number {
+    width: 200px;
+    height: 50px;
+    float: left;
+    padding-top: 30px;
+}
+.div2{
+    width: 960px;
+    height: 200px;
+}
+.payObject {
+    width: 250px;
+    height: 200px;
+    float: left;
+    padding-top: 70px;
+    padding-left: 60px;
+}
+
+.cost {
+    width: 150px;
+    height: 200px;
+    float: left;
+    padding-top: 70px;
+    padding-left: 20px;
+}
+
+.userInformation {
+    width: 550px;
+    height: 200px;
+    float: left;
+    padding-top: 35px;
+    padding-left: 100px;
+}
+.div3{
+    width: 960px;
+    height: 60px;
+}
+.cost1 {
+    width: 400px;
+    height: 60px;
+    float: left;
+    padding-top: 50px;
+    padding-left: 130px;
+}
+
+.dealer {
+    width:450px;
+    height:60px;
+    float: left;
+    padding-top: 20px;
+    padding-left: 300px;
+}
+
+.date {
+    width: 100px;
+    height: 60px;
+    float: left;
+    padding-top: 30px;
+}
+.search {
+    width: 100%;
+    height: 62px;
+    background: url("../img/home.jpg") no-repeat left 15px;
+    background-size: 60px 80px;
+    overflow: hidden;
+}
+
+.sear {
+    width: 200px;
+    font-family: 微软雅黑;
+    margin-top: 25px;
+    margin-left: 50px;
+    font-size: 25px;
+    float: left;
+}

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.mapper.StudentDTOMapper">
+    <!--ResultMap-->
+    <resultMap id="studentDTOResultMap" type="com.uic.po.StudentDTO">
+        <id column="id" property="id"/>
+        <result column="student_id" property="studentId"/>
+        <result column="name" property="name"/>
+        <result column="student_idcard" property="idCard"/>
+        <result column="dorm" property="dorm"/>
+        <result column="phone" property="phone"/>
+        <result column="flag" property="flag"/>
+        <collection property="studentBroadband" javaType="com.uic.po.StudentBroadband">
+            <id column="id" property="id" />
+            <result column="student_id" property="studentId" />
+            <result column="student_access_number" property="accessNumber" />
+            <result column="student_accout_number" property="accoutNumber" />
+            <result column="network_speed" property="speed" />
+            <result column="money" property="money" />
+            <result column="start_time" property="startTime" />
+            <result column="last_time" property="lastTime"/>
+            <result column="end_time" property="endTime"/>
+            <result column="flag" property="flag" />
+        </collection>
+        <collection property="user" javaType="com.uic.po.User">
+            <id column="id" property="id" />
+            <result column="user_id" property="userId" />
+            <result column="user_password" property="userPassword" />
+            <result column="user_role_id" property="userRoleId" />
+            <result column="flag" property="flag" />
+        </collection>
+
+
+    </resultMap>
+
+    <!--sql语句-->
+    <select id="queryStudentAndBroadband" resultMap="studentDTOResultMap">
+        SELECT student.student_id,student.name,student.student_idcard,student.dorm,student.phone,
+        useropen_broadband_student.student_access_number,useropen_broadband_student.student_accout_number,
+        useropen_broadband_student.network_speed,useropen_broadband_student.money,
+        useropen_broadband_student.start_time,useropen_broadband_student.last_time,
+        useropen_broadband_student.end_time
+        FROM   student,useropen_broadband_student
+        WHERE student.student_id=useropen_broadband_student.student_id
+        AND student.flag=1
+
+    </select>
+    <select id="findStudentAndBroadbandById" parameterType="java.lang.String" resultMap="studentDTOResultMap">
+       SELECT student.student_id,student.name,student.student_idcard,student.dorm,student.phone,
+			 useropen_broadband_student.student_access_number,useropen_broadband_student.student_accout_number,
+			 useropen_broadband_student.network_speed,useropen_broadband_student.money,
+			 useropen_broadband_student.start_time,useropen_broadband_student.last_time,
+			 useropen_broadband_student.end_time
+      FROM   student,useropen_broadband_student
+      WHERE student.student_id=#{studentId}
+      AND student.student_id=useropen_broadband_student.student_id
+      AND student.flag=1
+
+    </select>
+    <select id="queryStudentAndBroadbandByInOrder" resultMap="studentDTOResultMap">
+        SELECT student.student_id,student.name,student.student_idcard,student.dorm,student.phone,
+			 useropen_broadband_student.student_access_number,useropen_broadband_student.student_accout_number,
+			 useropen_broadband_student.network_speed,useropen_broadband_student.money,
+			 useropen_broadband_student.start_time,useropen_broadband_student.last_time,
+			 useropen_broadband_student.end_time
+        FROM   student,useropen_broadband_student
+        WHERE student.student_id IN(	SELECT student_id FROM useropen_order_student WHERE flag=1)
+        AND student.student_id=useropen_broadband_student.student_id
+        AND student.flag=1
+    </select>
+    <select id="findStudentAndBroadbandByInOrder" parameterType="java.lang.String" resultMap="studentDTOResultMap">
+         SELECT student.student_id,student.name,student.student_idcard,student.dorm,student.phone,
+			 useropen_broadband_student.student_access_number,useropen_broadband_student.student_accout_number,
+			 useropen_broadband_student.network_speed,useropen_broadband_student.money,
+			 useropen_broadband_student.start_time,useropen_broadband_student.last_time,
+			 useropen_broadband_student.end_time
+        FROM   student,useropen_broadband_student
+        WHERE student.student_id IN(	SELECT student_id FROM useropen_order_student WHERE student_id=#{studentId} AND flag=1)
+        AND student.student_id=useropen_broadband_student.student_id
+        AND student.flag=1
+    </select>
+    <select id="queryStudentAndBroadbandByNotInOrder" resultMap="studentDTOResultMap">
+        SELECT student.student_id,student.name,student.student_idcard,student.dorm,student.phone,
+			 useropen_broadband_student.student_access_number,useropen_broadband_student.student_accout_number,
+			 useropen_broadband_student.network_speed,useropen_broadband_student.money,
+			 useropen_broadband_student.start_time,useropen_broadband_student.last_time,
+			 useropen_broadband_student.end_time
+      FROM   student,useropen_broadband_student
+      WHERE student.student_id NOT IN(SELECT student_id FROM useropen_order_student WHERE flag=1)
+      AND student.student_id=useropen_broadband_student.student_id
+      AND student.flag=1
+    </select>
+    <select id="findStudentAndBroadbandByNotInOrder" parameterType="java.lang.String" resultMap="studentDTOResultMap">
+         SELECT student.student_id,student.name,student.student_idcard,student.dorm,student.phone,
+			 useropen_broadband_student.student_access_number,useropen_broadband_student.student_accout_number,
+			 useropen_broadband_student.network_speed,useropen_broadband_student.money,
+			 useropen_broadband_student.start_time,useropen_broadband_student.last_time,
+			 useropen_broadband_student.end_time
+        FROM   student,useropen_broadband_student
+        WHERE student.student_id NOT IN(SELECT student_id FROM useropen_order_student WHERE flag=1)
+        AND student.student_id=useropen_broadband_student.student_id
+        AND student.flag=1
+		AND student.student_id=#{studentId}
+    </select>
+    <select id="queryStudentAllInfo"  resultMap="studentDTOResultMap">
+       SELECT student.student_id,student.name,student.student_idcard,student.dorm,student.phone,
+        useropen_broadband_student.student_access_number,useropen_broadband_student.student_accout_number,
+        useropen_broadband_student.network_speed,useropen_broadband_student.money,
+        useropen_broadband_student.start_time,useropen_broadband_student.last_time,
+        useropen_broadband_student.end_time,login_user.user_password
+        FROM   student,useropen_broadband_student,login_user
+        WHERE student.student_id=useropen_broadband_student.student_id
+		AND student.student_id=login_user.user_id
+        AND student.flag=1
+    </select>
+    <select id="findStudentAllInfoById" parameterType="java.lang.String" resultMap="studentDTOResultMap">
+      SELECT student.student_id,student.name,student.student_idcard,student.dorm,student.phone,
+			 useropen_broadband_student.student_access_number,useropen_broadband_student.student_accout_number,
+			 useropen_broadband_student.network_speed,useropen_broadband_student.money,
+			 useropen_broadband_student.start_time,useropen_broadband_student.last_time,
+			 useropen_broadband_student.end_time,login_user.user_password
+      FROM   student,useropen_broadband_student,login_user
+      WHERE student.student_id=#{studentId}
+      AND student.student_id=useropen_broadband_student.student_id
+      AND student.student_id=login_user.user_id
+      AND student.flag=1
+    </select>
+    <update id="updateStudentAllInfoById" >
+      UPDATE student,useropen_broadband_student
+        SET student.student_id=#{studentDTO.studentId},student.name=#{studentDTO.name},student.student_idcard=#{studentDTO.idCard},student.dorm=#{studentDTO.dorm},student.phone=#{studentDTO.phone},
+		    useropen_broadband_student.student_id=#{studentDTO.studentId},useropen_broadband_student.student_access_number=#{studentDTO.studentBroadband.accessNumber},
+		    useropen_broadband_student.student_accout_number=#{studentDTO.studentBroadband.accoutNumber},useropen_broadband_student.network_speed=#{studentDTO.studentBroadband.speed},
+		    useropen_broadband_student.money=#{studentDTO.studentBroadband.money},useropen_broadband_student.start_time=#{studentDTO.studentBroadband.startTime},
+		    useropen_broadband_student.last_time=#{studentDTO.studentBroadband.lastTime},useropen_broadband_student.end_time=#{studentDTO.studentBroadband.endTime}
+        WHERE student.student_id=#{studentId}
+        AND student.student_id=useropen_broadband_student.student_id
+        AND student.flag=1
+    </update>
+    <update id="deleteStudentAllInfoById" parameterType="java.lang.String" >
+      UPDATE student,useropen_broadband_student
+        SET   student.flag=0,useropen_broadband_student.flag=0
+        WHERE student.student_id=#{studentId}
+        AND student.student_id=useropen_broadband_student.student_id
+    </update>
+
+
+</mapper>

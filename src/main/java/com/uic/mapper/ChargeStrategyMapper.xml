@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.mapper.ChargeStrategyMapper">
+    <select id="queryChargeStrategy" resultType="com.uic.po.ChargeStrategy">
+        SELECT * FROM sys_charge_strategy WHERE flag=1
+        ORDER BY speed
+    </select>
+    <select id="findChargeStrategyBySpeed" parameterType="java.lang.Integer" resultType="com.uic.po.ChargeStrategy">
+         SELECT *
+         FROM sys_charge_strategy
+         WHERE speed=#{speed}
+         AND flag=1
+    </select>
+    <update id="updateChargeStrategy" parameterType="com.uic.po.ChargeStrategy">
+        UPDATE sys_charge_strategy SET speed=#{speed},price=#{price} WHERE id=#{id} AND flag=1
+    </update>
+    <update id="deleteChargeStrategyById">
+        UPDATE sys_charge_strategy SET flag=0 WHERE id=#{id}
+    </update>
+    <insert id="insertChargeStrategy" parameterType="com.uic.po.ChargeStrategy">
+        INSERT INTO sys_charge_strategy(speed,price) VALUES (#{speed},#{price})
+    </insert>
+</mapper>

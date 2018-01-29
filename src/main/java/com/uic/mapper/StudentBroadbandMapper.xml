@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.mapper.StudentBroadbandMapper">
+    <!--ResultMap-->
+    <resultMap id="studentBroadbandResultMap" type="com.uic.po.StudentBroadband">
+        <id column="id" property="id" />
+        <result column="student_id" property="studentId" />
+        <result column="student_access_number" property="accessNumber" />
+        <result column="student_accout_number" property="accoutNumber" />
+        <result column="network_speed" property="speed" />
+        <result column="money" property="money" />
+        <result column="start_time" property="startTime" />
+        <result column="last_time" property="lastTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="flag" property="flag" />
+    </resultMap>
+
+    <!--sql语句-->
+    <select id="findStudentBroadbandById" parameterType="java.lang.String" resultMap="studentBroadbandResultMap">
+        SELECT *
+        FROM useropen_broadband_student
+        WHERE student_id=#{studentId}
+        AND flag=1
+    </select>
+    <select id="findStudentBroadbandCountById" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM useropen_broadband_student
+        WHERE student_id=#{studentId}
+        AND flag=1
+    </select>
+    <insert id="insertStudentBroadband" parameterType="com.uic.po.StudentBroadband">
+        INSERT INTO useropen_broadband_student
+        ( useropen_broadband_student.student_id,useropen_broadband_student.student_access_number,student_accout_number,
+          useropen_broadband_student.network_speed,useropen_broadband_student.money,useropen_broadband_student.start_time,
+          useropen_broadband_student.last_time,useropen_broadband_student.end_time)
+        VALUES(#{studentId},#{accessNumber},#{accoutNumber},#{speed},#{money},#{startTime},#{lastTime},#{endTime})
+    </insert>
+    <insert id="insertOrUpdateStudentBroadband" parameterType="com.uic.po.StudentBroadband">
+         INSERT INTO useropen_broadband_student
+        ( student_id,student_access_number,student_accout_number,network_speed,money,start_time,last_time,end_time)
+        VALUES(#{studentId},#{accessNumber},#{accoutNumber},#{speed},#{money},#{startTime},#{lastTime},#{endTime})
+        ON DUPLICATE KEY UPDATE student_access_number=VALUES(student_access_number), student_accout_number=VALUES(student_accout_number)
+        ,network_speed=VALUES(network_speed),money=VALUES(money),start_time=VALUES(start_time),last_time=VALUES(last_time),end_time=VALUES(end_time),flag=1;
+    </insert>
+    <update id="updateStudentBroadbandSomeById" >
+        UPDATE useropen_broadband_student
+        SET network_speed=#{studentBroadband.speed},money=#{studentBroadband.money},start_time=#{studentBroadband.startTime},
+            last_time=#{studentBroadband.lastTime},end_time=#{studentBroadband.endTime}
+        WHERE student_id=#{studentId}
+
+    </update>
+
+    <delete id="deleteStudentBroadbandTrue" parameterType="java.lang.String">
+        DELETE FROM useropen_broadband_student
+        WHERE student_id LIKE #{id}
+    </delete>
+
+
+</mapper>

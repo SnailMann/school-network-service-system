@@ -1,0 +1,12 @@
+.search {
+    width: 100%;
+    height: 82px;
+    border-bottom: 1px solid #CCCCCC;
+    background:no-repeat left 15px;
+    background-size: 60px 80px;
+    overflow: hidden;
+}
+table th,table td{width: 11.1111111111%}
+
+.content{text-align: center;}
+

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.mapper.AccoutCancelMapper">
+    <!--ResultMap-->
+    <resultMap id="accoutCancelResultMap" type="com.uic.po.AccoutCancel">
+        <id column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="student_id" property="studentId"/>
+        <result column="result_flag" property="resultFlag"/>
+        <result column="cancel_reason" property="cancelReason"/>
+        <result column="flag" property="flag"/>
+    </resultMap>
+
+    <!--sql语句-->
+    <select id="findAccoutCancelReasonByOrderId" parameterType="java.lang.String" resultType="java.lang.String">
+          SELECT  cancel_reason
+          FROM   account_cancel
+          WHERE	 order_id=#{orderId}
+		  AND account_cancel.result_flag=1
+		  AND account_cancel.flag=1
+    </select>
+    <select id="findAccoutCancelByOrderId" parameterType="java.lang.String" resultMap="accoutCancelResultMap">
+        SELECT order_id,student_id,result_flag,cancel_reason
+        FROM account_cancel
+        WHERE order_id=#{orderId}
+        AND flag=1
+    </select>
+    <select id="findAccoutNotCancelCountById" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM account_cancel
+        WHERE student_id=#{studentId}
+        AND result_flag='0'
+    </select>
+    <insert id="insertAccoutCancel" parameterType="com.uic.po.AccoutCancel">
+      INSERT INTO account_cancel(order_id,student_id,result_flag,cancel_reason)
+      VALUES(#{orderId},#{studentId},#{resultFlag},#{cancelReason})
+    </insert>
+    <update id="deleteAccoutCancelByOrderId" parameterType="java.lang.String">
+        UPDATE account_cancel
+        SET   flag=0
+        WHERE order_id=#{orderId}
+    </update>
+    <update id="deleteAccoutCancelById" parameterType="java.lang.String">
+        UPDATE account_cancel
+        SET   flag=0
+        WHERE student_id=#{studentId}
+    </update>
+    <update id="updateAccoutCancelByOrderId">
+         UPDATE account_cancel
+         SET   result_flag=1,cancel_reason=#{cancelReason}
+         WHERE order_id=#{orderId}
+    </update>
+
+    <delete id="deleteAccoutCancelTrue" parameterType="java.lang.String">
+        DELETE FROM account_cancel
+        WHERE student_id  LIKE #{id}
+    </delete>
+
+
+</mapper>

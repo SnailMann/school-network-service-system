@@ -1,0 +1,135 @@
+* {
+    margin: 0px;
+    padding: 0px;;
+}
+
+.clear {
+    clear: both
+}
+
+html, body {
+    height: 100%;
+    font-family: 微软雅黑;
+}
+
+.containers {
+    width: 100%;
+    min-width: 1600px;
+    display: block;
+    height: 100%;
+}
+
+.left {
+    width: 14%;
+    height: 85%;
+    border-right: 1px solid #CCCCCC;
+    color: #000000;
+    font-size: 14px;
+    text-align: center;
+    float: left;
+    margin-top: -20px;
+}
+.right {
+    width: 86%;
+    height: 85%;
+    float: left;
+    margin-top: -20px;
+}
+
+.left_top {
+    margin-top: 15px;
+}
+
+.box {
+    margin-top: 24px;
+    border-top: 1px solid #CCCCCC;
+}
+
+.div1 {
+    text-align: center;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.div2 {
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    font-size: 13px;
+    position: relative;
+    border-bottom: #ccc 1px dotted;
+}
+
+.pic1 {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 40px;
+    top: 10px;
+    background: url(../img/2.png);
+}
+
+.pic2 {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 40px;
+    top: 10px;
+    background: url(../img/8.png);
+}
+
+.pic3 {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 40px;
+    top: 10px;
+    background: url(../img/1.png);
+}
+
+.pic4 {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 40px;
+    top: 10px;
+    background: url(../img/4.png);
+}
+
+.div3 {
+    display: none;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.div3 ul {
+    margin: 0;
+    padding: 0;
+}
+
+.div3 li {
+    height: 30px;
+    line-height: 30px;
+    list-style: none;
+    border-bottom: #ccc 1px dotted;
+    text-align: center;
+}
+
+
+.footer{
+    width: 100%;
+    height: 5%;
+    border-top: 1px solid #CCCCCC;
+    float: left;
+}
+.foot{
+    width: 100%;
+    text-align: center;
+    margin-top:20px ;
+}
+
+.iframe {
+    width: 90%;
+    height: 100%;
+    float: left;
+}

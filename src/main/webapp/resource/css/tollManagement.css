@@ -1,0 +1,25 @@
+.chargeList{ min-width:700px;border:solid 1px #ddd;border-radius:5px; width: 96%; position: absolute; top:100px; left:2%; }
+.chargeList01{background-color:#fcfcfc;padding:10px 15px;border-radius:4px 4px 0 0;border-bottom:solid 1px #ddd;}
+.chargeList02{ background-color:#fcfcfc; padding:10px 15px;}
+.addList{width: 90%; display: inline-block; position: absolute; top:500px; left: 2rem;  border:solid 1px #ddd;border-radius:5px;  }
+.addList01{  width: 100%; position: relative; top: -1.7rem;}
+.addList02{ background-color:#fcfcfc;padding:10px 15px;border-bottom:solid 1px #ddd; border-top:solid 1px #ddd; }
+.blank{ height: 5px; border-top:solid 1px #ddd; width: 100%; position: relative; top: -1.7rem;}
+.label01{  float: right;}
+.table th{ text-align:center;}
+.blank01{ height: 5px;}
+.addList03{ width: 70%; height: 350px; display: inline-block; position: relative;left:200px; top: 50px;}
+.btn01{  color:orangered; border-color: orange;}
+.btn02{ color: #2aabd2;border-color: #2aabd2;}
+.btn03{ border-color: orangered;}
+.btn04{ color: orange;border-color: orange;}
+.cor{ color: red;}
+.search {  width: 100%;  height: 82px;  border-bottom: 1px solid #CCCCCC;  background: url("../img/home.jpg") no-repeat left 15px;
+    background-size: 60px 80px;  overflow: hidden;  }
+.sear {  font-family: 微软雅黑;  margin-top: 25px;  margin-left: 50px;  font-size: 25px;  }
+.fun {  width: 200px;  height: 30px;  float: right;  margin-top: -40px;  }
+.screen{float: right;}
+
+
+
+

@@ -1,0 +1,30 @@
+.search {
+    width: 100%;
+    height: 82px;
+    border-bottom: 1px solid #CCCCCC;
+    background: url("../img/home.jpg") no-repeat left 15px;
+    background-size: 60px 80px;
+    overflow: hidden;
+}
+.sear {
+    font-family: 微软雅黑;
+    margin-top: 25px;
+    margin-left: 50px;
+    font-size: 25px;
+}
+.fun {
+    width: 200px;
+    height: 30px;
+    float: right;
+    margin-top: -40px;
+}
+
+table th,table td{width: 12.5%}
+
+.container{padding-top: 30px;}
+
+.content{text-align: center;}
+
+.footer{ padding-top: 20px;}
+.print{width: 50%;float: left;text-align: center;}
+.export{text-align: center;}

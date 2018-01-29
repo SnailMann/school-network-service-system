@@ -1,0 +1,43 @@
+.search {
+    width: 100%;
+    height: 82px;
+    border-bottom: 1px solid #CCCCCC;
+    background: url("../img/home.jpg") no-repeat left 15px;
+    background-size: 60px 80px;
+    overflow: hidden;
+}
+
+.sear {
+    font-family: 微软雅黑;
+    margin-top: 25px;
+    margin-left: 50px;
+    font-size: 25px;
+}
+
+
+.fun {
+    display: inline-block;
+    width: 20%;
+    height: 30px;
+    float: left;
+    margin-top: -40px;
+    margin-left: 23%;
+
+}
+
+#btn{
+    float: left;
+    margin: 30px 55px;
+}
+.tab-content{
+    width: 100%;
+}
+#table{
+    width: 100% !important;
+}
+tr>th{
+    text-align: center;
+}
+td{
+    text-align: center;
+}

@@ -1,0 +1,11 @@
+.img {  width: 600px;  height: 100px;  background: url("../img/17.jpg") no-repeat;  background-size: 100px 100px;
+         margin: 0 auto; position: relative; top:10rem; }
+.center{
+    width: 400px;  margin: 0 auto; position: relative; top:3.7rem;
+}
+.center01{
+    width: 600px;  margin: 0 auto; position: relative; top:4.2rem;
+}
+span{color: blue;}
+
+

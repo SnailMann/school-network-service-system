@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.mapper.StudentOrderMapper">
+    <!--ResultMap-->
+    <resultMap id="studentOrderResultMap" type="com.uic.po.StudentOrder">
+        <id column="id" property="id"/>
+        <result column="student_id" property="studentId"/>
+        <result column="name" property="name"/>
+        <result column="dorm" property="dorm"/>
+        <result column="username" property="userId"/>
+        <result column="password" property="userPassword"/>
+        <result column="network_speed" property="speed"/>
+        <result column="last_time" property="lastTime"/>
+        <result column="money" property="money"/>
+        <result column="print_time" property="printTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="order_id" property="orderId"/>
+        <result column="worker_id" property="workerId"/>
+        <result column="student_access_number" property="accessNumber"/>
+        <result column="flag" property="flag"/>
+    </resultMap>
+
+    <!--sql语句-->
+    <!--select的所有搜索语句，都加了一个宽带信息表的accessNumber，要注意一下，不是纯的StudentOrder-->
+    <select id="queryStudentOrder" resultMap="studentOrderResultMap">
+        SELECT   useropen_order_student.student_id,useropen_order_student.name,useropen_order_student.dorm,
+                  useropen_order_student.username,useropen_order_student.password,useropen_order_student.network_speed,
+                  useropen_order_student.last_time,useropen_order_student.money,useropen_order_student.print_time,
+                  useropen_order_student.end_time,useropen_order_student.order_id,useropen_order_student.worker_id,
+				  useropen_broadband_student.student_access_number
+          FROM   useropen_order_student,account_cancel,useropen_broadband_student
+          WHERE	 useropen_order_student.order_id=account_cancel.order_id
+		  AND useropen_broadband_student.student_id=useropen_order_student.student_id
+		  AND account_cancel.result_flag=0
+		  AND useropen_order_student.flag=1
+		  AND account_cancel.flag=1
+        ORDER BY print_time DESC
+    </select>
+    <select id="findStudentOrderById" parameterType="java.lang.String" resultMap="studentOrderResultMap">
+        SELECT useropen_order_student.student_id,useropen_order_student.name,useropen_order_student.dorm,
+                 useropen_order_student.username,useropen_order_student.password,useropen_order_student.network_speed,
+                 useropen_order_student.last_time,useropen_order_student.money,useropen_order_student.print_time,
+                 useropen_order_student.end_time,useropen_order_student.order_id,useropen_order_student.worker_id,
+                 useropen_broadband_student.student_access_number
+          FROM   useropen_order_student,account_cancel,useropen_broadband_student
+          WHERE	 useropen_order_student.student_id=#{studentId}
+          AND useropen_broadband_student.student_id=useropen_order_student.student_id
+		  AND useropen_order_student.order_id=account_cancel.order_id
+		  AND account_cancel.result_flag=0
+		  AND useropen_order_student.flag=1
+		  AND account_cancel.flag=1
+          ORDER BY end_time DESC
+
+    </select>
+    <select id="findStudentOrderTopById" parameterType="java.lang.String" resultMap="studentOrderResultMap">
+        SELECT  useropen_order_student.student_id,useropen_order_student.name,useropen_order_student.dorm,
+                 useropen_order_student.username,useropen_order_student.password,useropen_order_student.network_speed,
+                 useropen_order_student.last_time,useropen_order_student.money,useropen_order_student.print_time,
+                 useropen_order_student.end_time,useropen_order_student.order_id,useropen_order_student.worker_id,
+                 useropen_broadband_student.student_access_number
+          FROM   useropen_order_student,account_cancel,useropen_broadband_student
+          WHERE	 useropen_order_student.student_id=#{studentId}
+          AND useropen_broadband_student.student_id=useropen_order_student.student_id
+		  AND useropen_order_student.order_id=account_cancel.order_id
+		  AND account_cancel.result_flag=0
+		  AND useropen_order_student.flag=1
+		  AND account_cancel.flag=1
+			ORDER BY end_time DESC
+			LIMIT 1
+    </select>
+    <select id="findStudentOrderByOrderId" parameterType="java.lang.String" resultMap="studentOrderResultMap">
+          SELECT useropen_order_student.student_id,useropen_order_student.name,useropen_order_student.dorm,
+                 useropen_order_student.username,useropen_order_student.password,useropen_order_student.network_speed,
+                 useropen_order_student.last_time,useropen_order_student.money,useropen_order_student.print_time,
+                 useropen_order_student.end_time,useropen_order_student.order_id,useropen_order_student.worker_id,
+                 useropen_broadband_student.student_access_number
+          FROM   useropen_order_student,account_cancel,useropen_broadband_student
+          WHERE	 useropen_order_student.order_id=#{orderId}
+          AND useropen_broadband_student.student_id=useropen_order_student.student_id
+		  AND useropen_order_student.order_id=account_cancel.order_id
+		  AND account_cancel.result_flag=0
+		  AND useropen_order_student.flag=1
+		  AND account_cancel.flag=1
+          ORDER BY end_time DESC
+    </select>
+    <select id="findStudentOrderByDate"  resultMap="studentOrderResultMap">
+          SELECT useropen_order_student.student_id,useropen_order_student.name,useropen_order_student.dorm,
+                 useropen_order_student.username,useropen_order_student.password,useropen_order_student.network_speed,
+                 useropen_order_student.last_time,useropen_order_student.money,useropen_order_student.print_time,
+                 useropen_order_student.end_time,useropen_order_student.order_id,useropen_order_student.worker_id,
+                 useropen_broadband_student.student_access_number
+          FROM   useropen_order_student,account_cancel,useropen_broadband_student
+          WHERE print_time
+          BETWEEN #{topDate} AND #{buttomDate}
+          AND useropen_broadband_student.student_id=useropen_order_student.student_id
+		  AND useropen_order_student.order_id=account_cancel.order_id
+		  AND account_cancel.result_flag=0
+		  AND useropen_order_student.flag=1
+		  AND account_cancel.flag=1
+          ORDER BY end_time DESC
+    </select>
+    <select id="findStudentOrderByDateAndWorkerId"  resultMap="studentOrderResultMap">
+          SELECT useropen_order_student.student_id,useropen_order_student.name,useropen_order_student.dorm,
+                 useropen_order_student.username,useropen_order_student.password,useropen_order_student.network_speed,
+                 useropen_order_student.last_time,useropen_order_student.money,useropen_order_student.print_time,
+                 useropen_order_student.end_time,useropen_order_student.order_id,useropen_order_student.worker_id,
+                 useropen_broadband_student.student_access_number
+          FROM   useropen_order_student,account_cancel,useropen_broadband_student
+          <where>
+              <if test="workerId!=null and workerId!=''">
+                  AND useropen_order_student.worker_id=#{workerId}
+              </if>
+              AND print_time
+              BETWEEN #{topDate} AND #{buttomDate}
+              AND useropen_broadband_student.student_id=useropen_order_student.student_id
+              AND useropen_order_student.order_id=account_cancel.order_id
+              AND account_cancel.result_flag=0
+              AND useropen_order_student.flag=1
+              AND account_cancel.flag=1
+          </where>
+          ORDER BY print_time DESC
+    </select>
+    <select id="findStudentOrderCountByDate"  resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM useropen_order_student
+        WHERE print_time BETWEEN #{topDate} AND #{buttomDate}
+        AND flag=1
+        ORDER BY print_time
+
+    </select>
+    <select id="queryStudentOrderCancel" resultMap="studentOrderResultMap">
+         SELECT useropen_order_student.student_id,useropen_order_student.name,useropen_order_student.dorm,
+                 useropen_order_student.username,useropen_order_student.password,useropen_order_student.network_speed,
+                 useropen_order_student.last_time,useropen_order_student.money,useropen_order_student.print_time,
+                 useropen_order_student.end_time,useropen_order_student.order_id,useropen_order_student.worker_id
+          FROM   useropen_order_student,account_cancel
+          WHERE	 useropen_order_student.order_id=account_cancel.order_id
+		  AND account_cancel.result_flag=1
+		  AND account_cancel.flag=1
+		  ORDER BY useropen_order_student.print_time DESC
+
+    </select>
+    <select id="findStudentOrderCancelById" parameterType="java.lang.String" resultMap="studentOrderResultMap">
+          SELECT useropen_order_student.student_id,useropen_order_student.name,useropen_order_student.dorm,
+                 useropen_order_student.username,useropen_order_student.password,useropen_order_student.network_speed,
+                 useropen_order_student.last_time,useropen_order_student.money,useropen_order_student.print_time,
+                 useropen_order_student.end_time,useropen_order_student.order_id,useropen_order_student.worker_id
+          FROM   useropen_order_student,account_cancel
+          WHERE	 useropen_order_student.student_id=#{studentId}
+		  AND useropen_order_student.order_id=account_cancel.order_id
+		  AND account_cancel.result_flag=1
+		  AND useropen_order_student.flag=1
+		  AND account_cancel.flag=1
+    </select>
+    <select id="findStudentOrderCancelByOrderId" parameterType="java.lang.String" resultMap="studentOrderResultMap">
+          SELECT useropen_order_student.student_id,useropen_order_student.name,useropen_order_student.dorm,
+                 useropen_order_student.username,useropen_order_student.password,useropen_order_student.network_speed,
+                 useropen_order_student.last_time,useropen_order_student.money,useropen_order_student.print_time,
+                 useropen_order_student.end_time,useropen_order_student.order_id,useropen_order_student.worker_id
+          FROM   useropen_order_student,account_cancel
+          WHERE	 useropen_order_student.order_id=#{orderId}
+		  AND useropen_order_student.order_id=account_cancel.order_id
+		  AND account_cancel.result_flag=1
+		  AND useropen_order_student.flag=1
+		  AND account_cancel.flag=1
+    </select>
+    <insert id="insertStudentOrder" parameterType="com.uic.po.StudentOrder" >
+     INSERT INTO useropen_order_student(student_id,name,dorm,username,password,network_speed,last_time,money,print_time,end_time,order_id,worker_id)
+      VALUES (#{studentId},#{name},#{dorm},#{userId},#{userPassword},#{speed},#{lastTime},#{money},#{printTime},#{endTime},#{orderId},#{workerId})
+    </insert>
+    <update id="updateStudentOrderByOrderId" >
+        UPDATE useropen_order_student
+        SET   student_id=#{studentOrder.studentId},name=#{studentOrder.name},dorm=#{studentOrder.dorm},username=#{studentOrder.userId},
+              password=#{studentOrder.userPassword},network_speed=#{studentOrder.speed},last_time=#{studentOrder.lastTime},money=#{studentOrder.money},
+              print_time=#{studentOrder.printTime},end_Time=#{studentOrder.endTime},order_id=#{studentOrder.orderId},worker_id=#{studentOrder.workerId},flag=1
+        WHERE order_id=#{orderId}
+
+    </update>
+    <update id="deleteStudentOrderById" parameterType="java.lang.String">
+        UPDATE useropen_order_student
+        SET   flag=0
+        WHERE student_id=#{studentId}
+    </update>
+    <update id="deleteStudentOrderByOrderId" parameterType="java.lang.String">
+        UPDATE useropen_order_student
+        SET   flag=0
+        WHERE order_id=#{orderId}
+    </update>
+    <update id="updateStudentOrderSomeById">
+        UPDATE useropen_order_student
+        SET   name=#{studentOrder.name},dorm=#{studentOrder.dorm}
+        WHERE student_id=#{studentId}
+
+    </update>
+
+    <delete id="deleteStudentOrderTrue" parameterType="java.lang.String">
+        DELETE FROM useropen_order_student
+        WHERE student_id LIKE #{id}
+    </delete>
+
+    <select id="countStudentOrderBySid" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(*) FROM useropen_order_student WHERE student_id=#{id}
+    </select>
+</mapper>

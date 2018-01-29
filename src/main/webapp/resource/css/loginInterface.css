@@ -1,0 +1,12 @@
+body{ background:url("../img/bg.jpg") fixed  center no-repeat;  background-size: cover ;width:99.4%; }
+.center{ background: url("../img/login_center_bg01.jpg");  background-size: 100% 100%;  width: 350px;
+         height: 260px; text-align: center; margin: 200px auto; border-radius: 10px;}
+.label{ height: 55px; line-height: 55px;}
+.titleColor {color: black;}
+.account{ height: 60px; line-height: 60px;}
+.account>input{ width: 70%; height: 50%;}
+.divpassword{ height: 60px; line-height: 60px;}
+.divpassword>input{ width: 70%; height: 50%;}
+.divbutton{ height: 60px; line-height: 60px;}
+.login1 { width: 60px; height: 27px; background-color: #B0E0E6; border: 0px; border-radius: 3px; }
+.reset1 { width: 60px; height: 27px; background-color: #B0E0E6; border: 0px; border-radius: 3px; }
