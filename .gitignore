@@ -4,6 +4,8 @@ target/
 .svn/
 src/main/webapp/WEB-INF/classes/
 NetworkServiceSystem.iml
+NetworkServiceSystem.ipr
+NetworkServiceSystem.iws
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
