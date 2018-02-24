@@ -2,7 +2,7 @@ target/
 .idea/
 .git/
 .svn/
-*.class
+src/main/webapp/WEB-INF/classes/
 NetworkServiceSystem.iml
 pom.xml.tag
 pom.xml.releaseBackup
@@ -12,6 +12,8 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+*.class
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
