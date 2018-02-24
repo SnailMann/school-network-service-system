@@ -1,6 +1,5 @@
 package com.uic.controller;
 
-import com.sun.javafx.sg.PGShape;
 import com.uic.po.User;
 import com.uic.po.Worker;
 import com.uic.service.UserService;
@@ -10,12 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * 管理员控制层
